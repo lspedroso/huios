@@ -1,19 +1,28 @@
 import { useState } from 'react'
+import { Routes, Route, useNavigate } from 'react-router-dom'
+
 import Hero from './components/Hero'
 import SideMenu from './components/SideMenu'
 import MainSection from './components/MainSection'
 import Footer from './components/Footer'
+import Inscricao from './components/Inscricao'
 
-export default function App() {
+function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const navigate = useNavigate()
 
   const scrollTo = (id) => {
     setMenuOpen(false)
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+
+    document.getElementById(id)?.scrollIntoView({
+      behavior: 'smooth'
+    })
   }
 
   return (
     <div className="app">
+
       <button
         className={`hamburger ${menuOpen ? 'is-open' : ''}`}
         type="button"
@@ -26,7 +35,11 @@ export default function App() {
         <span />
       </button>
 
-      <SideMenu open={menuOpen} onNavigate={scrollTo} onClose={() => setMenuOpen(false)} />
+      <SideMenu
+        open={menuOpen}
+        onNavigate={scrollTo}
+        onClose={() => setMenuOpen(false)}
+      />
 
       {menuOpen && (
         <button
@@ -37,9 +50,27 @@ export default function App() {
         />
       )}
 
-      <Hero onInscribe={() => scrollTo('main')} />
+      <Hero
+        onInscribe={() => navigate('/inscricao')}
+      />
+
       <MainSection />
+
       <Footer />
+
     </div>
+  )
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+
+      <Route
+        path="/inscricao"
+        element={<Inscricao />}
+      />
+    </Routes>
   )
 }

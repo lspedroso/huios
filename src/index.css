@@ -254,6 +254,75 @@ a {
 .cta:active {
   transform: translateY(0);
 }
+/*pagina de inscricao*/
+.inscricao-page{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1.25rem;
+  background:
+    radial-gradient(
+      circle at top right, rgba(242, 110, 34, 0.16),
+      transparent 40%
+      ),
+    var(--bg);
+}
+/* card de inscricao */
+.inscricao-card, .pagamento-card {
+  max-width: 500px;
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: clamp(2rem, 4vw, 3rem);
+
+}
+
+.inscricao-card h1, .pagamento-card h1{
+  margin:0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  line-height: 1.1;
+  cor:var(--text); 
+}
+
+.inscricao-descricao{
+  margin: 0.8rem 0 2.2rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Formulario de inscricao */
+.inscricao-card form {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.form-group{
+  display: grid;
+  gap: 0.55rem;
+}
+
+.form-group> label{
+  color:var (--text);
+  font-size:0.9rem;
+  font-weight:600;
+}
+
+/* Inputs */
+.form-group> input[type="text"],
+.form-group> input[type="number"] {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  outline: none;
+  background: #0f0f0f;
+  color: var(--text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
 /* Main */
 .main {

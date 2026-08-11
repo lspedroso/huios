@@ -10,7 +10,7 @@ export default function MainSection() {
             Momentos
           </h2>
           <p className="section-text">
-            Memórias do HUIÓS em movimento contínuo.
+            Memórias do nosso retiro HUIÓS.
           </p>
           <Carousel />
         </section>

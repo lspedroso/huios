@@ -53,7 +53,7 @@ export default function LoginForm() {
             setMessage('')
           }}
         >
-          Inscrever-se
+          Cadastre-se
         </button>
       </div>
 
