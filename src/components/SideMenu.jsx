@@ -1,6 +1,6 @@
 const links = [
   { id: 'inicio', label: 'Início' },
-  { id: 'main', label: 'Inscreva-se' },
+  { id: 'inscricao', label: 'Inscreva-se' },
   { id: 'main', label: 'Login' },
   { id: 'contato', label: 'Contato' },
 ]

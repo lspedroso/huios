@@ -1,19 +1,28 @@
 import { useState } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
 
 import Hero from './components/Hero'
 import SideMenu from './components/SideMenu'
 import MainSection from './components/MainSection'
 import Footer from './components/Footer'
 import Inscricao from './components/Inscricao'
+import LoginPage from './components/LoginPage'
+import Admin from './pages/Admin'
+import AdminRoute from './components/AdminRoute'
 
 function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const navigate = useNavigate()
 
-  const scrollTo = (id) => {
+  const handleMenuNavigate = (id) => {
     setMenuOpen(false)
+
+    if (id === 'inscricao') {
+      navigate('/inscricao')
+      return
+    }
 
     document.getElementById(id)?.scrollIntoView({
       behavior: 'smooth'
@@ -37,7 +46,7 @@ function Home() {
 
       <SideMenu
         open={menuOpen}
-        onNavigate={scrollTo}
+        onNavigate={handleMenuNavigate}
         onClose={() => setMenuOpen(false)}
       />
 
@@ -64,13 +73,20 @@ function Home() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-
-      <Route
-        path="/inscricao"
-        element={<Inscricao />}
-      />
-    </Routes>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/inscricao" element={<Inscricao />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <Admin />
+            </AdminRoute>
+          }
+        />
+      </Routes>
+    </AuthProvider>
   )
 }

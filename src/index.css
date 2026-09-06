@@ -254,6 +254,42 @@ a {
 .cta:active {
   transform: translateY(0);
 }
+/* Botao Voltar */
+.btn-voltar {
+  position: fixed;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 40;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: rgba(13, 13, 13, 0.72);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange);
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-voltar:hover {
+  background: rgba(242, 110, 34, 0.15);
+  border-color: var(--orange);
+  color: #ffffff;
+  transform: translateX(-3px);
+}
+
+.btn-voltar:active {
+  transform: translateX(0);
+}
+
+.btn-voltar svg {
+  display: block;
+}
+
 /*pagina de inscricao*/
 .inscricao-page{
   min-height: 100vh;
@@ -279,18 +315,316 @@ a {
 
 }
 
-.inscricao-card h1, .pagamento-card h1{
-  margin:0;
+.inscricao-card h1, .pagamento-card h1 {
+  margin: 0;
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 2.8rem);
   line-height: 1.1;
-  cor:var(--text); 
+  color: var(--text); 
 }
 
-.inscricao-descricao{
+.inscricao-descricao {
   margin: 0.8rem 0 2.2rem;
   color: var(--muted);
   line-height: 1.6;
+}
+
+/* ==============================================================================
+   TELA DE STATUS DA INSCRIÇÃO (CONFIRMADA / ACEITA & PENDENTE)
+   ============================================================================== */
+.status-card {
+  max-width: 520px;
+  width: 100%;
+  background: #141414;
+  border-radius: 1.25rem;
+  padding: clamp(2rem, 5vw, 3rem);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8);
+  animation: fadeInStatus 0.45s ease-out;
+}
+
+@keyframes fadeInStatus {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Variante Aceita / Confirmada */
+.status-card.is-confirmada {
+  border: 1px solid rgba(82, 196, 26, 0.38);
+  background: radial-gradient(circle at top, rgba(82, 196, 26, 0.12), transparent 55%), #141414;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 45px rgba(82, 196, 26, 0.1);
+}
+
+/* Variante Pendente / Enviada */
+.status-card.is-pendente {
+  border: 1px solid rgba(242, 110, 34, 0.35);
+  background: radial-gradient(circle at top, rgba(242, 110, 34, 0.1), transparent 55%), #141414;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 45px rgba(242, 110, 34, 0.08);
+}
+
+/* Ícone de Destaque Animado */
+.status-icon-wrapper {
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.35rem;
+  position: relative;
+}
+
+.status-card.is-confirmada .status-icon-wrapper {
+  background: rgba(82, 196, 26, 0.15);
+  border: 1px solid rgba(82, 196, 26, 0.45);
+  color: #73d13d;
+  box-shadow: 0 0 28px rgba(82, 196, 26, 0.28);
+}
+
+.status-card.is-pendente .status-icon-wrapper {
+  background: rgba(242, 110, 34, 0.15);
+  border: 1px solid rgba(242, 110, 34, 0.45);
+  color: var(--orange);
+  box-shadow: 0 0 28px rgba(242, 110, 34, 0.28);
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 0.85rem;
+}
+
+.status-card.is-confirmada .status-chip {
+  background: rgba(82, 196, 26, 0.12);
+  border: 1px solid rgba(82, 196, 26, 0.35);
+  color: #73d13d;
+}
+
+.status-card.is-pendente .status-chip {
+  background: rgba(242, 110, 34, 0.12);
+  border: 1px solid rgba(242, 110, 34, 0.35);
+  color: var(--orange);
+}
+
+.status-chip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.status-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 5vw, 2.45rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.status-description {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 1.75rem;
+}
+
+/* Painel de Dados do Ticket / Pass */
+.status-ticket {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  margin-bottom: 1.75rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.status-ticket-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.status-ticket-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.status-ticket-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.status-ticket-label {
+  color: var(--muted);
+}
+
+.status-ticket-value {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.status-info-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.75rem;
+  padding: 0.9rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--muted);
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-top: 0.4rem;
+}
+
+.status-info-box svg {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: var(--muted);
+}
+
+/* Botões de Ação do Status */
+.status-cta-whatsapp {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  font-size: 1rem;
+  font-weight: 700;
+  min-height: 3.25rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.status-card.is-confirmada .status-cta-whatsapp {
+  background: linear-gradient(135deg, #52c41a, #389e0d);
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(82, 196, 26, 0.35);
+}
+
+.status-card.is-confirmada .status-cta-whatsapp:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 14px 35px rgba(82, 196, 26, 0.45);
+}
+
+.status-card.is-pendente .status-cta-whatsapp {
+  background: linear-gradient(135deg, var(--orange), var(--orange-soft));
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(242, 110, 34, 0.35);
+}
+
+.status-card.is-pendente .status-cta-whatsapp:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 14px 35px rgba(242, 110, 34, 0.45);
+}
+
+.status-btn-voltar {
+  display: block;
+  text-align: center;
+  margin-top: 1.25rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.status-btn-voltar:hover {
+  color: var(--text);
+}
+
+/* Badge de Conta Conectada no Formulário */
+.inscricao-account-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.inscricao-account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.84rem;
+  overflow: hidden;
+}
+
+.inscricao-account-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.inscricao-account-email {
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inscricao-account-sub {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.inscricao-btn-switch {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.55rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.inscricao-btn-switch:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--text);
 }
 
 /* Formulario de inscricao */
@@ -304,15 +638,18 @@ a {
   gap: 0.55rem;
 }
 
-.form-group> label{
-  color:var (--text);
-  font-size:0.9rem;
-  font-weight:600;
+.form-group > label {
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 /* Inputs */
-.form-group> input[type="text"],
-.form-group> input[type="number"] {
+.form-group > input[type="text"],
+.form-group > input[type="number"],
+.form-group > input[type="tel"],
+.form-group > input[type="date"],
+.form-group > input[type="email"] {
   width: 100%;
   min-height: 3rem;
   padding: 0.8rem 0.95rem;
@@ -321,7 +658,71 @@ a {
   outline: none;
   background: #0f0f0f;
   color: var(--text);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color-scheme: dark;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.form-group > input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+  cursor: pointer;
+}
+
+.form-group > input:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(242, 110, 34, 0.18);
+  background: #141414;
+}
+
+/* Input com Ícone (Telefone / WhatsApp) */
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-with-icon .input-icon {
+  position: absolute;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange);
+  pointer-events: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.input-with-icon input[type="tel"] {
+  width: 100%;
+  min-height: 3.1rem;
+  padding: 0.8rem 1rem 0.8rem 2.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  outline: none;
+  background: #0f0f0f;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.input-with-icon input[type="tel"]::placeholder {
+  color: rgba(168, 168, 168, 0.55);
+  letter-spacing: 0.01em;
+}
+
+.input-with-icon input[type="tel"]:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(242, 110, 34, 0.18);
+  background: #141414;
+}
+
+.input-with-icon:focus-within .input-icon {
+  color: var(--orange-soft);
+  transform: scale(1.05);
 }
 
 /* Main */
@@ -336,8 +737,31 @@ a {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
-  gap: clamp(2rem, 5vw, 3.5rem);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header empty"
+    "carousel auth";
+  column-gap: clamp(2rem, 5vw, 3.5rem);
+  row-gap: 1.25rem;
   align-items: start;
+}
+
+.main-header-area {
+  grid-area: header;
+}
+
+.main-header-area .section-text {
+  margin-bottom: 0;
+}
+
+.main-carousel-area {
+  grid-area: carousel;
+}
+
+.main-right {
+  grid-area: auth;
+  align-self: center;
+  width: 100%;
 }
 
 .section-title {
@@ -429,6 +853,61 @@ a {
   border: 1px solid var(--line);
   border-radius: 1rem;
   padding: clamp(1.4rem, 3vw, 2rem);
+}
+
+/* Botão Google Auth */
+.btn-google-auth {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: #ffffff;
+  color: #1f1f1f;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-height: 3.1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+  margin: 1.25rem 0 1.25rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.btn-google-auth:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(0.97);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.btn-google-auth:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Divisor Auth */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1.25rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-divider span {
+  padding: 0 0.85rem;
 }
 
 .auth-tabs {
@@ -586,11 +1065,22 @@ a {
 @media (max-width: 900px) {
   .main-inner {
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "header"
+      "carousel"
+      "auth";
+    row-gap: 2rem;
+  }
+
+  .main-right {
+    align-self: stretch;
   }
 }
 
 @media (max-width: 560px) {
-  .hamburger {
+  .hamburger,
+  .btn-voltar {
     top: 1rem;
     left: 1rem;
   }
